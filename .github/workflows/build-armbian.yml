@@ -12,7 +12,7 @@ on:
       set_release:
         description: "Select OS Release."
         required: false
-        default: "jammy"
+        default: "noble"
         type: choice
         options:
           - jammy
@@ -22,7 +22,7 @@ on:
       armbian_board:
         description: "Select device board."
         required: false
-        default: "all"
+        default: "xiaobao"
         type: choice
         options:
           - all
@@ -167,7 +167,7 @@ on:
       armbian_kernel:
         description: "Select kernel version."
         required: false
-        default: "6.6.y"
+        default: "6.1.y_6.6.y"
         type: choice
         options:
           - 5.4.y
@@ -185,10 +185,10 @@ on:
       kernel_repo:
         description: "Set the kernel repository."
         required: false
-        default: "ophub/kernel"
+        default: "zrj004/kernel"
         type: choice
         options:
-          - ophub/kernel
+          - zrj004/kernel
       kernel_usage:
         description: "Set the tags of the stable kernel."
         required: false
@@ -218,10 +218,10 @@ on:
       builder_name:
         description: "Set Armbian builder signature."
         required: false
-        default: "ophub"
+        default: "sE"
         type: choice
         options:
-          - ophub
+          - sE
           - angel
           - yourname
 
@@ -286,7 +286,7 @@ jobs:
           df -hT ${PWD}
           git clone -q --single-branch --depth=1 --branch=main https://github.com/armbian/build.git build
           ln -sf /builder/build ${GITHUB_WORKSPACE}/build
-          ln -sf /builder/build /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/build
+          ln -sf /builder/build /home/runner/work/_actions/zrj004/amlogic-s9xxx-armbian/main/build
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Compile Armbian [ ${{ inputs.set_release }} ]
@@ -324,7 +324,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Rebuild Armbian
-        uses: ophub/amlogic-s9xxx-armbian@main
+        uses: zrj004/amlogic-s9xxx-armbian@main
         if: ${{ steps.clean.outputs.status }} == 'success' && !cancelled()
         with:
           build_target: armbian
