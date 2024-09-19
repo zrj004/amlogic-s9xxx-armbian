@@ -164,6 +164,7 @@ on:
           - zcube1-max
           - zk-r39a
           - zysj
+          - nanopim4
       armbian_kernel:
         description: "Select kernel version."
         required: false
@@ -223,7 +224,7 @@ on:
         options:
           - ophub
           - angel
-          - yourname
+          - sE
 
 env:
   TZ: America/New_York
